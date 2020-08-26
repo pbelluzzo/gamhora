@@ -1,0 +1,29 @@
+{
+    "name": "vendor_name/gamhora",
+    "description": "Aplicação para gerenciamento de projetos de jogos",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pedro Belluzzo",
+            "email": "pedrobelluzzo@gmail.com"
+        }
+    ],
+    "config":{
+        "vendor-dir": "vendor"
+    },
+    "autoload":{
+        "psr-4":{
+            "app\\": "app/",
+            "app\\core": "app/core",
+            "app\\backend": "app/backend",
+            "app\\backend\\model": "app/backend/model",
+            "app\\backend\\dao": "app/backend/dao"
+        },
+        "files":[
+        ]
+    },
+    "require": {
+        "coffeecode/router":"1.0.*"
+    }
+}

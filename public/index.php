@@ -6,6 +6,12 @@
     <title>Gamhora</title>
 </head>
 <body>
-    
+<?php
+require __DIR__ . "/vendor/autoload.php";
+require __DIR__ . "/../app/core/config.php";
+require __DIR__ . "/../app/core/connection.php";
+
+
+?>
 </body>
 </html>
