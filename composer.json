@@ -1,6 +1,6 @@
 {
     "name": "vendor_name/gamhora",
-    "description": "Aplicação para gerenciamento de projetos de jogos",
+    "description": "Application for game projects management",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -16,9 +16,9 @@
         "psr-4":{
             "app\\": "app/",
             "app\\core": "app/core",
-            "app\\backend": "app/backend",
-            "app\\backend\\model": "app/backend/model",
-            "app\\backend\\dao": "app/backend/dao"
+            "app\\src": "app/src",
+            "app\\src\\model": "app/src/model",
+            "app\\src\\dao": "app/src/dao"
         },
         "files":[
         ]

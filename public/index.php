@@ -7,11 +7,24 @@
 </head>
 <body>
 <?php
-require __DIR__ . "/vendor/autoload.php";
+
+use app\src\controller\UserController;
+
+require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../app/core/config.php";
 require __DIR__ . "/../app/core/connection.php";
-
-
 ?>
+
+
+<?php
+$_POST["name"] = "pedro";
+$_POST["password"] = "senha";
+$_POST["email"] = "pedrobelluzzo";
+$controller = new UserController;
+//$controller->autenticate();
+//$controller->deleteUser(8);
+?>
+
+
 </body>
 </html>

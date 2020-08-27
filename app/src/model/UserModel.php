@@ -1,21 +1,24 @@
 <?php
 
-namespace app\backend\model;
+namespace app\src\model;
+
+use app\src\dao\UserDao;
+use Exception;
 
 class UserModel {
     private $name;
     private $password;
     private $email;
-    private $isAdmin;
+    private $isAdmin = 0;
 
     public function getName()
     {
         return $this->name;
     }
     
-    public function setName($value)
+    public function setName($name)
     {
-        $this->name = $value;
+        $this->name = $name;
     }
 
     public function getPassword()
@@ -23,9 +26,9 @@ class UserModel {
         return $this->password;
     }
     
-    public function setPassword($value)
+    public function setPassword($password)
     {
-        $this->password = $value;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public function getEmail()
@@ -33,9 +36,9 @@ class UserModel {
         return $this->email;
     }
     
-    public function setEmail($value)
+    public function setEmail($email)
     {
-        $this->email = $value;
+        $this->email = $email;
     }
 
     public function getAdminInfo()
@@ -51,5 +54,14 @@ class UserModel {
             return;
         }
         $this->isAdmin = 1;
+    }
+
+    public function checkRegisteredEmail()
+    {
+        $userDao = new UserDao;
+        if ($userDao->readByEmail($this->email))
+        {
+            throw new Exception("Email already registered!");
+        }
     }
 }

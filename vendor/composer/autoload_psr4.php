@@ -6,10 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'app\\src\\model' => array($baseDir . '/app/src/model'),
+    'app\\src\\dao' => array($baseDir . '/app/src/dao'),
+    'app\\src' => array($baseDir . '/app/src'),
     'app\\core' => array($baseDir . '/app/core'),
-    'app\\backend\\model' => array($baseDir . '/app/backend/model'),
-    'app\\backend\\dao' => array($baseDir . '/app/backend/dao'),
-    'app\\backend' => array($baseDir . '/app/backend'),
     'app\\' => array($baseDir . '/app'),
     'CoffeeCode\\Router\\' => array($vendorDir . '/coffeecode/router/src'),
 );

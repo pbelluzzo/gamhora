@@ -12,30 +12,22 @@ class Connection {
 
     public static function getInstance()
     {
+
         if (!isset(self::$connection))
         {
-            self::$connection = new Connection;
+            $dbconfig = self::getIniFile();
+            try{
+                self::$connection = new PDO("mysql:host=" . $dbconfig['host'] .
+             ";dbname=" . $dbconfig['database'] . ";user=" . $dbconfig['user'] . 
+             ";password=" . $dbconfig['password']);
+            } catch (PDOException $e){
+                echo 'Connection failed : ' . $e->getMessage();
+            }
         }  
         return self::$connection;
     }
-
-    private function __construct(){
-        return $this->connect();
-    }
-
-    private function connect(){
-        $dbconfig = $this->getIniFile();
-        try{
-            $connection = new PDO("mysql:host=" . $dbconfig['host'] .
-         ";dbname=" . $dbconfig['database'] . ";user=" . $dbconfig['user'] . 
-         ";password=" . $dbconfig['password']);
-        } catch (PDOException $e){
-            echo 'Connection failed : ' . $e->getMessage();
-        }
-        return $connection;
-    }
     
-    private function getIniFile(){
+    private static function getIniFile(){
         $iniPath = (CORE_PATH . '/env.ini');
         $dbconfig = parse_ini_file($iniPath);
         return $dbconfig;

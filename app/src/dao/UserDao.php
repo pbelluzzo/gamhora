@@ -1,9 +1,9 @@
 <?php
 
-namespace app\backend\dao;
+namespace app\src\dao;
 
 use app\core\Connection;
-use app\backend\model\UserModel;
+use app\src\model\UserModel;
 use PDO;
 
 class UserDao {
@@ -11,7 +11,7 @@ class UserDao {
     private $connection;
 
     public function __construct(){
-        $connection = Connection::getInstance();
+        $this->connection = Connection::getInstance();
     }
 
     public function create(UserModel $userModel){
@@ -27,6 +27,15 @@ class UserDao {
     {
         $statement = $this->connection->prepare("SELECT * FROM TBL_USERS WHERE usr_id = :id");
         $statement->bindParam(':id', $id);
+        $statement->execute();
+        $queryResult = $statement->fetch(PDO::FETCH_ASSOC);
+        return $queryResult;
+    }
+
+    public function readByEmail($email)
+    {
+        $statement = $this->connection->prepare("SELECT * FROM TBL_USERS WHERE usr_email = :email");
+        $statement->bindParam(':email', $email);
         $statement->execute();
         $queryResult = $statement->fetch(PDO::FETCH_ASSOC);
         return $queryResult;
