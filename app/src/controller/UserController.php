@@ -4,6 +4,7 @@ namespace app\src\controller;
 
 use app\src\dao\UserDao;
 use app\src\model\UserModel;
+use app\core\Request;
 use Exception;
 use PDOException;
 
@@ -18,12 +19,13 @@ class UserController{
     public function register(){
         $user = new UserModel;
 
-        $user->setName($_POST["name"]);
-        $user->setPassword($_POST["password"]);
-        $user->setEmail($_POST["email"]);
+        $user->setName(Request::post("name"));
+        $user->setPassword(Request::post("password"));
+        $user->setEmail(Request::post("email"));
 
         $user->checkRegisteredEmail();
 
+        echo Request::post("name");
         return $this->userDao->create($user);
     }
 
@@ -39,7 +41,7 @@ class UserController{
 
     public function autenticate()
     {
-        if($credentials = $this->userDao->readByEmail($_POST["email"]))
+        if($credentials = $this->userDao->readByEmail(Request::post("email")))
         {
             $this->checkPassword($_POST["password"], $credentials['usr_password']);
             $this->login();

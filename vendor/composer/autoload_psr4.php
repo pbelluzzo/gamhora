@@ -11,5 +11,4 @@ return array(
     'app\\src' => array($baseDir . '/app/src'),
     'app\\core' => array($baseDir . '/app/core'),
     'app\\' => array($baseDir . '/app'),
-    'CoffeeCode\\Router\\' => array($vendorDir . '/coffeecode/router/src'),
 );
