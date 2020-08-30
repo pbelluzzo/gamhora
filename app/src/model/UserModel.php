@@ -11,6 +11,7 @@ class UserModel extends Model {
     protected $tableName = "tbl_users";
     protected $tableColumns = ['usr_name' => '', 'usr_password' => '', 'usr_email' => '', 'usr_isAdmin' => 0];
     protected $id;
+    protected $prefix = 'usr_';
 
     public function setAdminInfo($value)
     {
@@ -25,7 +26,7 @@ class UserModel extends Model {
     public function checkRegisteredEmail()
     {
         $userDao = new UserDao;
-        if ($userDao->readByEmail($this->usr_email))
+        if ($userDao->readByEmail($this))
         {
             throw new Exception("Email already registered!");
         }

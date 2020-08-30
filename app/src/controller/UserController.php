@@ -30,8 +30,16 @@ class UserController{
 
     public function deleteUser($id)
     {
+        $user = new UserModel;
+        $user->setId($id);
+        if(!$this->userDao->readById($user))
+        {
+            throw new Exception("User not found");
+            return;
+        }
+
         try{
-            $this->userDao->deleteById($id);
+            $this->userDao->deleteById($user);
         } catch (PDOException $e){
             echo 'Failed : ' . $e->getMessage();
         }

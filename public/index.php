@@ -10,11 +10,10 @@ $_POST["password"] = "senha";
 $_POST["email"] = "pedrobelluzzo";
 $controller = new UserController;
 
-if(!$controller->register()){
-    echo "DEURUIM";
-}
 
+
+$controller->register();
 //$controller->autenticate();
-//$controller->deleteUser(8);
+//$controller->deleteUser(35);
 
 

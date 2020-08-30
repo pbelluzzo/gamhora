@@ -5,6 +5,8 @@ namespace app\src\dao;
 use app\core\Connection;
 use app\core\QueryBuilder;
 use app\src\model\Model;
+use PDO;
+use PDOException;
 
 class Dao {
 
@@ -12,6 +14,17 @@ class Dao {
 
     public function __construct(){
         $this->connection = Connection::getInstance();
+    }
+
+    public function fetchModel(Model $model)
+    {
+        $dbRegistry = $this->readById($model);
+        foreach ($dbRegistry as $column)
+        {
+            $columnName = array_keys($column);
+            $model->$columnName = $column;
+        }
+        return $model;
     }
 
     public function create(Model $model){
@@ -45,8 +58,30 @@ class Dao {
         foreach($model->getTableColumns() as $tableColumn)
         {
             $value = $model->$tableColumn;
+            var_dump($value);
+            var_dump($tableColumn);
+            echo "<br>";
             $statement->bindParam(":${tableColumn}", $value);
         }
     }
+
+    public function readById($model)
+    {
+        $id = $model->getId();
+        $filter = $model->getPrefix() . 'id' . ' = :id';
+        $statement = $this->connection->prepare(QueryBuilder::buildSelect($model->getTableName(),"*",$filter));
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $queryResult = $statement->fetch(PDO::FETCH_ASSOC);
+        return $queryResult;
+    }
     
+    public function deleteById($model)
+    {
+        $id = $model->getId();
+        $filter = $model->getPrefix() . 'id' . ' = :id';
+        $statement = $this->connection->prepare(QueryBuilder::buildDelete($model->getTableName(), $filter));
+        $statement->bindParam(":id", $id);
+        return $statement->execute();
+    }
 }

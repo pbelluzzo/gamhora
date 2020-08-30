@@ -8,6 +8,7 @@ class Model{
     protected $tableName;
     protected $tableColumns = [];
     protected $id;
+    protected $prefix;
 
     public function __get($property)
     {
@@ -17,6 +18,21 @@ class Model{
     public function __set($property,$value)
     {
         $this->tableColumns[$property] = $value;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($value)
+    {
+        $this->id = $value;
+    }
+
+    public function getPrefix()
+    {
+        return $this->prefix;
     }
 
     public function getTableName()
