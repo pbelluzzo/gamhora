@@ -2,35 +2,51 @@
 
 namespace app\src\dao;
 
+use app\core\Connection;
 use app\core\QueryBuilder;
+use app\src\model\Model;
 
 class Dao {
-    protected $tableName;
-    protected $tableFields = [];
 
-    public function create($model){
-        $values = $this->createInsertValues();
-        $statement = $this->connection->prepare(QueryBuilder::buildInsert($this->tableName, $this->tableFields, $values));
+    protected $connection;
+
+    public function __construct(){
+        $this->connection = Connection::getInstance();
+    }
+
+    public function create(Model $model){
+        $values = $this->createInsertValues($model);
+        $statement = $this->connection->prepare(QueryBuilder::buildInsert($model->getTableName(), $this->stringTableColumns($model), $values));
         $this->bindInsertParams($statement, $model);
+        var_dump($statement);
         return $statement->execute();
     }
 
-    private function createInsertValues()
+    private function stringTableColumns($model)
     {
-        $value = '';
-        foreach($this->tableFields as $tableField)
+        $columnsString = implode(",",$model->getTableColumns());
+        return $columnsString;
+    }
+
+    private function createInsertValues($model)
+    {
+        $bindColumns = '';
+        foreach($model->getTableColumns() as $column)
         {
-            $value .= ":${tableField},";
+            $bindColumns .= ":${column},";
         }
-        $value = substr($value,0,-1);
-        return $value;
+        $bindColumns = substr($bindColumns,0,-1);
+        return $bindColumns;
     }
 
     private function bindInsertParams($statement, $model)
     {
-        foreach($this->tableFields as $tableField)
+        $value = '';
+        foreach($model->getTableColumns() as $tableColumn)
         {
-            $statement->bindParam(":${tableField}", $model->$tableField);
+            $value = $model->$tableColumn;
+            $statement->bindParam(":${tableColumn}", $value);
         }
     }
+    
 }

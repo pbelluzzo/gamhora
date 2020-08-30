@@ -19,13 +19,12 @@ class UserController{
     public function register(){
         $user = new UserModel;
 
-        $user->setName(Request::post("name"));
-        $user->setPassword(Request::post("password"));
-        $user->setEmail(Request::post("email"));
+        $user->usr_name = Request::post("name");
+        $user->usr_password = Request::post("password");
+        $user->usr_email = Request::post("email");
 
         $user->checkRegisteredEmail();
 
-        echo Request::post("name");
         return $this->userDao->create($user);
     }
 

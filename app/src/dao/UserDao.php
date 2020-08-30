@@ -2,26 +2,13 @@
 
 namespace app\src\dao;
 
-use app\core\Connection;
 use app\src\model\UserModel;
+use app\src\dao\Dao;
 use PDO;
 
-class UserDao {
+class UserDao extends Dao{
     
-    private $connection;
-
-    public function __construct(){
-        $this->connection = Connection::getInstance();
-    }
-
-    public function create(UserModel $userModel){
-        $statement = $this->connection->prepare("INSERT INTO TBL_USERS (usr_name, usr_password, usr_email, usr_isAdmin) VALUES (:name, :password, :email, :isAdmin);");
-        $statement->bindParam(':name', $userModel->getName());
-        $statement->bindParam(':password', $userModel->getPassword());
-        $statement->bindParam(':email', $userModel->getEmail());
-        $statement->bindParam(':isAdmin', $userModel->getAdminInfo());
-        return $statement->execute();
-    }
+    protected $connection;
     
     public function readById($id)
     {

@@ -2,49 +2,15 @@
 
 namespace app\src\model;
 
+use app\src\model\Model;
 use app\src\dao\UserDao;
 use Exception;
 
-class UserModel {
-    private $name;
-    private $password;
-    private $email;
-    private $isAdmin = 0;
-
-    public function getName()
-    {
-        return $this->name;
-    }
+class UserModel extends Model {
     
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    
-    public function setPassword($password)
-    {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getAdminInfo()
-    {
-        return $this->isAdmin;
-    }
+    protected $tableName = "tbl_users";
+    protected $tableColumns = ['usr_name' => '', 'usr_password' => '', 'usr_email' => '', 'usr_isAdmin' => 0];
+    protected $id;
 
     public function setAdminInfo($value)
     {
@@ -59,7 +25,7 @@ class UserModel {
     public function checkRegisteredEmail()
     {
         $userDao = new UserDao;
-        if ($userDao->readByEmail($this->email))
+        if ($userDao->readByEmail($this->usr_email))
         {
             throw new Exception("Email already registered!");
         }
