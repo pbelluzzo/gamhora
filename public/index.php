@@ -14,6 +14,7 @@ $controller = new UserController;
 
 $controller->register();
 //$controller->autenticate();
-//$controller->deleteUser(35);
+//$controller->deleteUser(55);
+
 
 

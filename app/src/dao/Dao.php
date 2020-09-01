@@ -8,11 +8,13 @@ use app\src\model\Model;
 use PDO;
 use PDOException;
 
-class Dao {
+class Dao 
+{
 
     protected $connection;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->connection = Connection::getInstance();
     }
 
@@ -61,7 +63,7 @@ class Dao {
             var_dump($value);
             var_dump($tableColumn);
             echo "<br>";
-            $statement->bindParam(":${tableColumn}", $value);
+            $statement->bindParam(":" . $tableColumn, $value);            
         }
     }
 
