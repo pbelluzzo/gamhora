@@ -8,6 +8,13 @@ use app\core\Request;
 use Exception;
 use PDOException;
 
-class Controller {
-    
+class Controller 
+{
+    protected $Dao;
+
+    public function fillObject($model)
+    {
+        $this->Dao->fetchModel($model);
+        return $model;
+    }
 }

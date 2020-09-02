@@ -7,14 +7,13 @@ use app\src\controller\UserController;
 
 $_POST["name"] = "pedro";
 $_POST["password"] = "senha";
-$_POST["email"] = "pedrobelluzzo";
+$_POST["email"] = "pedrobelluzzo3";
 $controller = new UserController;
 
 
-
-$controller->register();
+//$controller->register();
 //$controller->autenticate();
-//$controller->deleteUser(55);
+//$controller->deleteUser(78);
 
 
 

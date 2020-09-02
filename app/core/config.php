@@ -1,4 +1,5 @@
 <?php
+define('ENV_PATH', realpath(dirname(__FILE__,3)));
 define('MODEL_PATH', realpath(dirname(__FILE__) . '/../backend/model'));
 define('DAO_PATH', realpath(dirname(__FILE__) . '/../backend/dao'));
 define('CONTROLLER_PATH', realpath(dirname(__FILE__) . '/../backend/controller'));

@@ -29,7 +29,7 @@ class Connection {
     }
     
     private static function getIniFile(){
-        $iniPath = (CORE_PATH . '/env.ini');
+        $iniPath = (ENV_PATH . '/env.ini');
         $dbconfig = parse_ini_file($iniPath);
         return $dbconfig;
     }

@@ -7,8 +7,8 @@ use app\src\model\ProjectModel;
 use app\src\dao\Dao;
 use PDO;
 
-class ProjectDao extends Dao{
-    
+class ProjectDao extends Dao
+{
     protected $connection;
 
     public function readByAuthor($model)

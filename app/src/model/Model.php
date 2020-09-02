@@ -3,8 +3,8 @@
 namespace app\src\model;
 
 
-class Model{
-
+class Model
+{
     protected $tableName;
     protected $tableColumns = [];
     protected $id;

@@ -10,7 +10,6 @@ use PDOException;
 
 class Dao 
 {
-
     protected $connection;
 
     public function __construct()
@@ -21,15 +20,14 @@ class Dao
     public function fetchModel(Model $model)
     {
         $dbRegistry = $this->readById($model);
-        foreach ($dbRegistry as $column)
-        {
-            $columnName = array_keys($column);
-            $model->$columnName = $column;
+        foreach ($dbRegistry as $key => $value){
+            $model->$key = $value;
         }
         return $model;
     }
 
-    public function create(Model $model){
+    public function create(Model $model)
+    {
         $values = $this->createInsertValues($model);
         $statement = $this->connection->prepare(QueryBuilder::buildInsert($model->getTableName(), $this->stringTableColumns($model), $values));
         $this->bindInsertParams($statement, $model);
@@ -46,8 +44,7 @@ class Dao
     private function createInsertValues($model)
     {
         $bindColumns = '';
-        foreach($model->getTableColumns() as $column)
-        {
+        foreach($model->getTableColumns() as $column){
             $bindColumns .= ":${column},";
         }
         $bindColumns = substr($bindColumns,0,-1);
@@ -56,14 +53,15 @@ class Dao
 
     private function bindInsertParams($statement, $model)
     {
-        $value = '';
-        foreach($model->getTableColumns() as $tableColumn)
-        {
-            $value = $model->$tableColumn;
-            var_dump($value);
+        $value = [];
+        $i=0;
+        foreach($model->getTableColumns() as $tableColumn){
+            $value[$i] = $model->$tableColumn;
+            var_dump($value[$i]);
             var_dump($tableColumn);
             echo "<br>";
-            $statement->bindParam(":" . $tableColumn, $value);            
+            $statement->bindParam(":" . $tableColumn, $value[$i]);
+            $i ++;            
         }
     }
 
