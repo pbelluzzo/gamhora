@@ -16,4 +16,5 @@ $controller = new UserController;
 //$controller->deleteUser(78);
 
 
+require_once (VIEW_PATH . "/template/header.html");
 

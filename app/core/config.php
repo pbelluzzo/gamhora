@@ -1,8 +1,9 @@
 <?php
 define('ENV_PATH', realpath(dirname(__FILE__,3)));
-define('MODEL_PATH', realpath(dirname(__FILE__) . '/../backend/model'));
-define('DAO_PATH', realpath(dirname(__FILE__) . '/../backend/dao'));
-define('CONTROLLER_PATH', realpath(dirname(__FILE__) . '/../backend/controller'));
+define('VIEW_PATH', realpath(dirname(__FILE__) . '/../src/view'));
+define('MODEL_PATH', realpath(dirname(__FILE__) . '/../src/model'));
+define('DAO_PATH', realpath(dirname(__FILE__) . '/../src/dao'));
+define('CONTROLLER_PATH', realpath(dirname(__FILE__) . '/../src/controller'));
 define('STYLES_PATH', realpath(dirname(__FILE__) . '/../../public/styles'));
 define('CORE_PATH', realpath(dirname(__FILE__)));
 define('JS_PATH', realpath(dirname(__FILE__) . '/../../public/js'));
